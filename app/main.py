@@ -1,19 +1,19 @@
 class Person:
+    people = {}
     def __init__(self, name: str, age: int) -> None:
         self.name = name
         self.age = age
         Person.people[name] = self
-    people = {}
 
 
 def create_person_list(people: list) -> list:
-    for person in people:
-        Person(person["name"], person["age"])
+    Person.people = {}
+    [Person(person["name"], person["age"]) for person in people]
     for pers in people:
-        if "wife" in pers and pers["wife"] is not None:
+        if pers.get("wife"):
             Person.people[pers["name"]].wife \
                 = Person.people[pers["wife"]]
-        elif "husband" in pers and pers["husband"] is not None:
+        elif pers.get("husband"):
             Person.people[pers["name"]].husband \
                 = Person.people[pers["husband"]]
     return list(Person.people.values())

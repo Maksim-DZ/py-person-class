@@ -9,12 +9,13 @@ class Person:
 
 def create_person_list(people: list) -> list:
     Person.people = {}
-    [Person(person["name"], person["age"]) for person in people]
-    for pers in people:
-        if "wife" in pers and pers["wife"] is not None:
-            Person.people[pers["name"]].wife\
-                = Person.people[pers["wife"]]
-        if "husband" in pers and pers["husband"] is not None:
-            Person.people[pers["name"]].husband\
-                = Person.people[pers["husband"]]
-    return list(Person.people.values())
+    creatings = [Person(person["name"], person["age"]) for person in people]
+    for persona in people:
+        if persona.get("wife"):
+            Person.people[persona["name"]].wife\
+                = Person.people[persona["wife"]]
+        if persona.get("husband"):
+            Person.people[persona["name"]].husband\
+                = Person.people[persona["husband"]]
+
+    return creatings
